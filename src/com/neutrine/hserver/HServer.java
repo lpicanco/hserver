@@ -35,7 +35,7 @@ public class HServer {
      */
     public void start() throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/", new DefaultHandler(root));
+        server.createContext( "/", new DefaultHandler(root) );
         server.start();
     }
 
