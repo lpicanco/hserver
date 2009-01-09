@@ -1,6 +1,7 @@
 package com.neutrine.hserver;
 
 import com.neutrine.hserver.handlers.HServerHandler;
+import com.neutrine.hserver.utils.Utils;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import java.io.BufferedInputStream;
@@ -75,7 +76,7 @@ class DefaultHandler implements HServerHandler {
         
         if (response != null) {
             t.sendResponseHeaders(200, response.available());
-            sendBytes(response, os);
+            Utils.sendBytes(response, os);
         } else {
             String resp = "Not Found";
             
@@ -101,13 +102,6 @@ class DefaultHandler implements HServerHandler {
         return bis;
     }
 
-    private static void sendBytes(InputStream fis, OutputStream os) throws IOException {
-        byte[] buffer = new byte[1024];
-        int bytes = 0;
-
-        while ((bytes = fis.read(buffer)) != -1) {
-            os.write(buffer, 0, bytes);
-        }
-    }
+    
 }
 
