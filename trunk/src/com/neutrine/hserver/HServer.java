@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.neutrine.hserver;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -21,16 +17,15 @@ import java.util.Properties;
  * @author Luiz Picanço
  */
 public class HServer {
-
     private final String SERVER_PORT_CONFIG_KEY = "server.port";
     private final String SERVER_ROOT_CONFIG_KEY = "server.root";
+
     private int port;
     private String root;
     private Properties config;
 
     public HServer(Properties config) {
         this.config = config;
-
         this.port = Integer.parseInt(config.getProperty(SERVER_PORT_CONFIG_KEY));
         this.root = config.getProperty(SERVER_ROOT_CONFIG_KEY);
     }
@@ -67,7 +62,6 @@ public class HServer {
 }
 
 class Handler implements HttpHandler {
-
     private String root;
 
     public Handler(String root) {
@@ -108,7 +102,6 @@ class Handler implements HttpHandler {
     }
 
     private static void sendBytes(InputStream fis, OutputStream os) throws IOException {
-
         byte[] buffer = new byte[1024];
         int bytes = 0;
 
