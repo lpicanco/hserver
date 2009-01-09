@@ -1,7 +1,7 @@
 package com.neutrine.hserver;
 
+import com.neutrine.hserver.handlers.HServerHandler;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -35,7 +35,7 @@ public class HServer {
      */
     public void start() throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/", new Handler(root));
+        server.createContext("/", new DefaultHandler(root));
         server.start();
     }
 
@@ -61,10 +61,10 @@ public class HServer {
     }
 }
 
-class Handler implements HttpHandler {
+class DefaultHandler implements HServerHandler {
     private String root;
 
-    public Handler(String root) {
+    public DefaultHandler(String root) {
         this.root = root;
     }
 
