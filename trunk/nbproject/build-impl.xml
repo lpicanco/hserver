@@ -345,8 +345,10 @@ is divided into following sections:
         <!-- You can override this target in the ../build.xml file. -->
     </target>
     <target depends="init,deps-jar,-verify-automatic-build,-pre-pre-compile,-pre-compile,-do-compile,-post-compile" description="Compile project." name="compile">
-            <copy file="${src.dir}/hserver.properties" todir="${basedir}"/>
-        </target>
+        <copy file="${src.dir}/hserver.properties" todir="${basedir}"/>
+        <copy file="${src.dir}/hserver.properties" todir="${dist.dir}"/>
+        <copy file="${src.dir}/run.bat" todir="${dist.dir}"/>            
+    </target>
     <target name="-pre-compile-single">
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
@@ -424,10 +426,7 @@ is divided into following sections:
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
     </target>
-    <target depends="init,compile,-pre-jar,-do-jar-with-manifest,-do-jar-without-manifest,-do-jar-with-mainclass,-do-jar-with-libraries,-post-jar" description="Build JAR." name="jar">
-        <copy file="${src.dir}/hserver.properties" todir="${dist.dir}"/>
-        <copy file="${src.dir}/run.bat" todir="${dist.dir}"/>
-    </target>
+    <target depends="init,compile,-pre-jar,-do-jar-with-manifest,-do-jar-without-manifest,-do-jar-with-mainclass,-do-jar-with-libraries,-post-jar" description="Build JAR." name="jar"/>
     <!--
                 =================
                 EXECUTION SECTION
