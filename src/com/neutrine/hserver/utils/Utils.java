@@ -16,4 +16,8 @@ public class Utils {
             os.write(buffer, 0, bytes);
         }
     }
+
+    public static void sendBytes(byte[] bytes, OutputStream os) throws IOException {
+        os.write(bytes, 0, bytes.length);
+    }
 }

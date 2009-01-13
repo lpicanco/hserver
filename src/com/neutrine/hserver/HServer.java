@@ -20,15 +20,21 @@ import java.util.Properties;
 public class HServer {
     private final String SERVER_PORT_CONFIG_KEY = "server.port";
     private final String SERVER_ROOT_CONFIG_KEY = "server.root";
+    private final String SERVER_HANDLER_CONFIG_KEY = "server.handler";
 
     private int port;
     private String root;
     private Properties config;
+    private HServerHandler handler;
 
-    public HServer(Properties config) {
+    public HServer(Properties config) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         this.config = config;
         this.port = Integer.parseInt(config.getProperty(SERVER_PORT_CONFIG_KEY));
         this.root = config.getProperty(SERVER_ROOT_CONFIG_KEY);
+
+        handler = (HServerHandler)Class.forName(config.getProperty(SERVER_HANDLER_CONFIG_KEY)).newInstance();
+        handler.setRoot(root);
+
     }
 
     /**
@@ -36,7 +42,7 @@ public class HServer {
      */
     public void start() throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext( "/", new DefaultHandler(root) );
+        server.createContext( "/", handler);
         server.start();
     }
 
@@ -64,10 +70,6 @@ public class HServer {
 
 class DefaultHandler implements HServerHandler {
     private String root;
-
-    public DefaultHandler(String root) {
-        this.root = root;
-    }
 
     public void handle(HttpExchange t) throws IOException {
         InputStream is = t.getRequestBody();
@@ -100,6 +102,10 @@ class DefaultHandler implements HServerHandler {
         }
         
         return bis;
+    }
+
+    public void setRoot(String root) {
+        this.root = root;
     }
 
     
