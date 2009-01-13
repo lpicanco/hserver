@@ -22,6 +22,9 @@ public class HServer {
     private final String SERVER_ROOT_CONFIG_KEY = "server.root";
     private final String SERVER_HANDLER_CONFIG_KEY = "server.handler";
 
+    private final String SERVER_LIB_CONFIG_KEY = "server.lib.";
+    private final String SERVER_HANDLERS_CONFIG_KEY = "server.handlers";
+
     private int port;
     private String root;
     private Properties config;
