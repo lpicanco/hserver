@@ -1,4 +1,4 @@
-package com.neutrine.hserver.velocityhandler;
+package com.neutrine.hserver.handlers.velocity;
 
 import com.neutrine.hserver.handlers.HServerHandler;
 import com.neutrine.hserver.utils.Utils;
