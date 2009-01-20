@@ -1,4 +1,4 @@
-package com.google.code.hserver;
+package com.neutrine.hserver;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
